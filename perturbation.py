@@ -394,8 +394,10 @@ if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--gpus', default=1)
     parser.add_argument('--dev', default=0)
+    parser.add_argument('--img_data_dir', type=str, default=None)
+    parser.add_argument('--subgrp', type=str, default=None, choices=['all', 'pblack'])
     args = parser.parse_args()
-    args.subgrp = 'all'
+    #args.subgrp = 'all'
     out_dir_base = 'output/disease/'
     model_name = 'densenet-pall/'
 

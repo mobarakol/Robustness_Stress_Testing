@@ -22,7 +22,7 @@ num_classes = 14
 batch_size = 150
 epochs = 20
 num_workers = 4
-img_data_dir = '<path_to_data>/CheXpert-v1.0/'
+#img_data_dir = '<path_to_data>/CheXpert-v1.0/'
 
 
 class CheXpertDataset(Dataset):
@@ -120,7 +120,6 @@ class ResNet(pl.LightningModule):
         super().__init__()
         self.num_classes = num_classes
         self.model = models.resnet34(pretrained=True)
-        # freeze_model(self.model)
         num_features = self.model.fc.in_features
         self.model.fc = nn.Linear(num_features, self.num_classes)
 
@@ -171,7 +170,6 @@ class DenseNet(pl.LightningModule):
         super().__init__()
         self.num_classes = num_classes
         self.model = models.densenet121(pretrained=True)
-        # freeze_model(self.model)
         num_features = self.model.classifier.in_features
         self.model.classifier = nn.Linear(num_features, self.num_classes)
 
@@ -251,24 +249,6 @@ def test(model, data_loader, device):
     return preds.cpu().numpy(), targets.cpu().numpy(), logits.cpu().numpy()
 
 
-def embeddings(model, data_loader, device):
-    model.eval()
-
-    embeds = []
-    targets = []
-
-    with torch.no_grad():
-        for index, batch in enumerate(tqdm(data_loader, desc='Test-loop')):
-            img, lab = batch['image'].to(device), batch['label'].to(device)
-            emb = model(img)
-            embeds.append(emb)
-            targets.append(lab)
-
-        embeds = torch.cat(embeds, dim=0)
-        targets = torch.cat(targets, dim=0)
-
-    return embeds.cpu().numpy(), targets.cpu().numpy()
-
 
 def main(hparams):
 
@@ -342,27 +322,13 @@ def main(hparams):
     df = pd.concat([df, df_logits, df_targets], axis=1)
     df.to_csv(os.path.join(out_dir, 'predictions_test.csv'), index=False)
 
-    print('EMBEDDINGS')
-
-    model.remove_head()
-
-    embeds_val, targets_val = embeddings(model, data.val_dataloader(), device)
-    df = pd.DataFrame(data=embeds_val)
-    df_targets = pd.DataFrame(data=targets_val, columns=cols_names_targets)
-    df = pd.concat([df, df_targets], axis=1)
-    df.to_csv(os.path.join(out_dir, 'embeddings_val.csv'), index=False)
-
-    embeds_test, targets_test = embeddings(model, data.test_dataloader(), device)
-    df = pd.DataFrame(data=embeds_test)
-    df_targets = pd.DataFrame(data=targets_test, columns=cols_names_targets)
-    df = pd.concat([df, df_targets], axis=1)
-    df.to_csv(os.path.join(out_dir, 'embeddings_test.csv'), index=False)
 
 
 if __name__ == '__main__':
     parser = ArgumentParser()
     parser.add_argument('--gpus', default=1)
     parser.add_argument('--dev', default=0)
+    parser.add_argument('--img_data_dir', default=None)
     args = parser.parse_args()
 
     main(args)
