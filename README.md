@@ -4,6 +4,7 @@ Instruction to run the code and reproduce the results of our paper "Progressive 
 ## Dataset
 
 The CheXpert imaging dataset can be downloaded from https://stanfordmlgroup.github.io/competitions/chexpert/.
+ISIC skin lesion dataset can be downloaded from https://github.com/GalAvineri/ISIC-Archive-Downloader.
 
 
 Training command:
