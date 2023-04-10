@@ -1,5 +1,5 @@
 # Robustness_Stress_Testing
-Instruction to run the code and reproduce the results of our paper "Progressive Stress Testing for Analysing Model Robustness and Subgroup Disparities".
+Instruction to run the code and reproduce the results of our paper "Robustness Stress Testing in Medical Image Classification]{Robustness Stress Testing in Medical Image Classification".
 
 ## Dataset
 
