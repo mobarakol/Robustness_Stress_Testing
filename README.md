@@ -1,5 +1,5 @@
 # Robustness_Stress_Testing
-Instruction to run the code and reproduce the results of our paper "Robustness Stress Testing in Medical Image Classification]{Robustness Stress Testing in Medical Image Classification".
+Instruction to run the code and reproduce the results of our paper "Robustness Stress Testing in Medical Image Classification".
 
 ## Dataset
 
