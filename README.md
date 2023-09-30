@@ -23,7 +23,7 @@ If you use this code for your research, please cite our paper.
 @article{islam2023robustness,
   title={Robustness Stress Testing in Medical Image Classification},
   author={Islam, Mobarakol and Li, Zeju and Glocker, Ben},
-  journal={MICCAI-MedAGI},
+  journal={MICCAI-MedAGI Workshop},
   year={2023}
 }
 ```
