@@ -15,3 +15,15 @@ To run our robustness stress testing
 ```
 python perturbation.py --img_data_dir '<path_to_data>/CheXpert-v1.0/' --subgrp all
 ```
+
+## Citation
+If you use this code for your research, please cite our paper.
+
+```
+@article{islam2023robustness,
+  title={Robustness Stress Testing in Medical Image Classification},
+  author={Islam, Mobarakol and Li, Zeju and Glocker, Ben},
+  journal={MICCAI-MedAGI},
+  year={2023}
+}
+```
